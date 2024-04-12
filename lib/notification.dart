@@ -61,7 +61,8 @@ class NotificationPage extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            Navigator.of(context).push(_createRoute(title, detail));
+            GoRouter.of(context).pushNamed('notification_detail',
+                pathParameters: {'title': title, 'detail': detail});
           },
           splashColor: Colors.blueGrey[300],
           highlightColor: Colors.blueGrey[300],
@@ -134,7 +135,7 @@ class NotificationDetailPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => GoRouter.of(context).pop(),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
@@ -165,24 +166,4 @@ class NotificationDetailPage extends StatelessWidget {
       ),
     );
   }
-}
-
-Route _createRoute(String title, String detail) {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        NotificationDetailPage(title: title, detail: detail),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(-1.0, 0.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-    transitionDuration: Duration(milliseconds: 200),
-  );
 }

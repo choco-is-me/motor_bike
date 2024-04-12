@@ -56,7 +56,8 @@ class MessagesPage extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            Navigator.of(context).push(_createRoute(title, avatarImage));
+            GoRouter.of(context).pushNamed('messages_detail',
+                pathParameters: {'title': title, 'avatarImage': avatarImage});
           },
           splashColor: Colors.blueGrey[300],
           highlightColor: Colors.blueGrey[300],
@@ -278,24 +279,4 @@ class Message {
   final String text;
 
   Message({required this.sender, required this.text});
-}
-
-Route _createRoute(String title, String avatarImage) {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        ChatPage(title: title, avatarImage: avatarImage),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(-1.0, 0.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-    transitionDuration: Duration(milliseconds: 200),
-  );
 }

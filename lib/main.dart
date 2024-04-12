@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'app_routes.dart';
-import 'notification.dart';
 import 'dashboard.dart';
 import 'messages.dart';
 import 'schedule.dart';
@@ -80,7 +80,7 @@ class MyHomePage extends State<HomePage> {
             icon: Icon(Icons.circle_notifications),
             color: Colors.white,
             onPressed: () {
-              Navigator.of(context).push(_createRoute());
+              GoRouter.of(context).push('/notification');
             },
           )
         ],
@@ -202,24 +202,4 @@ class MyHomePage extends State<HomePage> {
       ),
     );
   }
-}
-
-Route _createRoute() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        const NotificationPage(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(1.0, 0.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-    transitionDuration: Duration(milliseconds: 200),
-  );
 }

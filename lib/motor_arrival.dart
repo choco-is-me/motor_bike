@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MotorArrivalPage extends StatelessWidget {
   const MotorArrivalPage({super.key});
@@ -11,7 +12,7 @@ class MotorArrivalPage extends StatelessWidget {
         leading: IconButton(
           icon:
               Icon(Icons.arrow_back, color: Colors.white), // Change color here
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => GoRouter.of(context).pop(),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
