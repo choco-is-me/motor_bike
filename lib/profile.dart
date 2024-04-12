@@ -16,9 +16,24 @@ class ProfilePage extends StatelessWidget {
         children: <Widget>[
           SizedBox(height: 20),
           Center(
-            child: CircleAvatar(
-              radius: 60,
-              backgroundImage: AssetImage('assets/avatar2.png'),
+            child: Container(
+              width: 120.0,
+              height: 120.0,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: AssetImage('assets/avatar2.png'),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
             ),
           ),
           SizedBox(height: 20),
